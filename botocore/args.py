@@ -309,6 +309,10 @@ class ClientArgsCreator(object):
             if self._ensure_boolean(scoped_config.get('tcp_keepalive', False)):
                 socket_options.append(
                     (socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1))
+
+        if self._config_store.get_config_variable('tcp_keepalive'):
+                socket_options.append(
+                    (socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1))
         return socket_options
 
     def _compute_retry_config(self, config_kwargs):
